@@ -11,16 +11,9 @@
 |
 */
 
-Route::get('/movies', function(){
-	return 'View all the movies';
-});
+Route::get('/movies', 'MovieController@index');
 
-Route::get('/movies/{title?}', function($title = null) {
-	if($title == null) {
-		return 'You need to specify a movie title';
-	}
-	return "You want to view the movie " .$title;
-});
+Route::get('/movies/{title?}', 'MovieController@view');
 
 
 

@@ -15,6 +15,10 @@ Route::get('/movies', 'MovieController@index');
 
 Route::get('/movies/{title?}', 'MovieController@view');
 
+if(config('app.env') == 'local') {
+	Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+}
+
 
 
 Route::get('/', function () {

@@ -107,5 +107,52 @@ class MovieController extends Controller
             ]);
     }
 
+    /**GET
+    * /movies/edit
+    *
+    */
+    public function edit($id) {
+
+        $movie = Movie::find($id);
+
+        if(is_null($movie)) {
+
+            Session::flash('message', 'Movie not found.');
+            return redirect('/movies');
+        }
+
+        return view('movies.edit')->with([
+            'id' => $id,
+            'movie' => $movie
+        ]);
+
+    }
+
+    /** POST
+    * /movies/edit
+    */
+    public function saveEdits(Request $request){
+
+
+        $this->validate($request, [
+            'title' => 'required',
+            'purchase_link' => 'required|url',
+            ]);
+
+        $movie = Movie::find($request->id);
+
+        $movie->title = $request->title;
+        $movie->cover = $request->cover;
+        $movie->actor = $request->actor;
+        $movie->genre = $request->genre;
+        $movie->description = $request->descprition;
+        $movie->purchase_link = $request->purchase_link;
+        $movie->save();
+
+        Session::flash('message', 'Your changes were saved');
+        return redirect('/movies/edit/' .$request->id);
+
+    }
+
 
 }

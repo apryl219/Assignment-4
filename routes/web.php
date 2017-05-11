@@ -20,6 +20,9 @@ Route::get('/movies/{title?}', 'MovieController@view');
 
 Route::get('/search', 'MovieController@search');
 
+Route::get('/movies/edit/{id}', 'MovieController@edit');
+Route::post('/movies/edit', 'MovieController@saveEdits');
+
 if(config('app.env') == 'local') {
 	Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 }

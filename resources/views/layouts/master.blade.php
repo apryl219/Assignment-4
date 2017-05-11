@@ -10,6 +10,9 @@
 		@stack('head')
 	</head>
 	<body>
+		@if(Session::get('message') !=null)
+			<div class="message">{{ Session::get('message') }}</div>
+		@endif
 		<header>
 			<--Add Header Image here in master.blade.php-->
 		</header>

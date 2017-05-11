@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Movie;
+use Session;
 
 class MovieController extends Controller
 {
@@ -11,7 +13,12 @@ class MovieController extends Controller
 	* /movies
 	**/
     public function index() {
-    	return 'View all the movies';
+    	$movies = Movie::orderBy('title')->get();
+        $newMovies = $movies->sortByDesc('created_at')->take(3);
+        return view('movies.index')->with([
+            'movies' => $movies,
+            'newMovies' => $newMovies,
+            ]);
     }
 
     /**
@@ -36,24 +43,31 @@ class MovieController extends Controller
 
     /**
     * POST
-    * /movies/new
-    * Process the form for adding a new movie
+    * /books/new
+    * Process the form for adding a new book
     */
     public function storeNewMovie(Request $request) {
 
         $this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'purchase_link' => 'required|url',
             ]);
-        $title = $request->input('title');
 
-        # 
-        #
-        # [...Code will eventually go here to actually save this movie to a database...]
-        #
-        #
 
-        # Redirect the user to the page to view the move
-        return redirect('movies/'.$title);
+        $movie = new Movie();
+        $movie->title = $request->title;
+        $movie->cover = $request->cover;
+        $movie->actor = $request->actor;
+        $movie->genre = $request->genre;
+        $movie->description = $request->descprition;
+        $movie->purchase_link = $request->purchase_link;
+        $movie->save();
+
+
+        Session::flash('message', 'Your movie ' .$request->title. ' was added to your watchlist.');
+
+        # Redirect the user to the page to view the book
+        return redirect('/movies');
     }
 
     /**
@@ -92,4 +106,6 @@ class MovieController extends Controller
             'searchResults' => $searchResults
             ]);
     }
+
+
 }

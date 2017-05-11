@@ -23,6 +23,9 @@ Route::get('/search', 'MovieController@search');
 Route::get('/movies/edit/{id}', 'MovieController@edit');
 Route::post('/movies/edit', 'MovieController@saveEdits');
 
+Route::get('/movies/delete/{id}', 'MovieController@confirmDeletion');
+Route::post('/movies/delete', 'MoviesController@delete');
+
 if(config('app.env') == 'local') {
 	Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 }

@@ -24,7 +24,6 @@ class CreateMoviesTable extends Migration
                
                 $table->string('title');
                 $table->string('cover')->nullable();
-                $table->string('actor')->nullable();
                 $table->string('genre')->nullable();
                 $table->text('description')->nullable();
                 $table->string('purchase_link');

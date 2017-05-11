@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Movie;
+use App\Actor;
 use Session;
 
 class MovieController extends Controller
@@ -37,7 +38,9 @@ class MovieController extends Controller
     * Display the form to add a new movie
     */
     public function createNewMovie(Request $request) {
-        return view('movies.new');
+        $actorsForDropdown = Actor::getactorsForDropdown();
+
+        return view('movies.new')->with(['actorsForDropdown' => $actorsForDropdown]);
     }
 
 
@@ -85,7 +88,7 @@ class MovieController extends Controller
 
             $movies = json_decode($moviesRawData, true);
 
-            foreach($movies as $title => $movie) {
+            foreach($movies as $title=>$movie) {
 
                 if($request->has('caseSensitive')) {
                     $match = $title == $searchTerm;
@@ -121,9 +124,12 @@ class MovieController extends Controller
             return redirect('/movies');
         }
 
+        $actorsForDropdown = Actor::getActorsForDropdown();
+
         return view('movies.edit')->with([
             'id' => $id,
-            'movie' => $movie
+            'movie' => $movie,
+            'actorsForDropdown' => $actorsForDropdown
         ]);
 
     }
@@ -143,10 +149,10 @@ class MovieController extends Controller
 
         $movie->title = $request->title;
         $movie->cover = $request->cover;
-        $movie->actor = $request->actor;
         $movie->genre = $request->genre;
         $movie->description = $request->descprition;
         $movie->purchase_link = $request->purchase_link;
+        $movie->actor_id = $request->actor_id;
         $movie->save();
 
         Session::flash('message', 'Your changes were saved');
@@ -154,5 +160,43 @@ class MovieController extends Controller
 
     }
 
+    /** GET
+    * Confirm deletion
+    */
+
+    public function confirmDeletion($id) {
+
+        $movie = Movie::find($id);
+
+        if(!$movie) {
+
+            Session::flash('message', 'Movie not found');
+            return redirect('/movies');
+
+        }
+
+        return view('movies.delete')->with('movie', $movie);
+    }
+
+    /** POST
+    * Delete Move
+    */
+
+    public function delete(Request $request) {
+
+        $movie = Movie::find($request->id);
+
+        if(!$movie) {
+
+            Session::flash('message', 'Deletion failed; movie not found');
+            return redirect('/movies');
+
+        }
+
+        $movie->delete();
+
+        Session::flash('message', $movie->title.' was deleted.');
+        return redirect('/movies');
+    }
 
 }

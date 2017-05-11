@@ -16,14 +16,20 @@
         <input type='text' name='title' id='title' value='{{ old('title', $movie->title) }}' ><br>
         <label for='cover'>Cover Image URL</label>
         <input type='text' name='cover' id='cover' value='{{ old('cover', $movie->cover) }}' ><br>
-        <label for='actor'>Actor</label>
-        <input type='text' name='actor' id='actor' value='{{ old('actor', $movie->actor) }}' ><br>
         <label for='genre'>Genre</label>
         <input type='text' name='genre' id='genre' value='{{ old('genre', $movie->genre) }}' ><br>
         <label for='description'>Description</label>
         <input type='text' name='description' id='description' value='{{ old('description', $movie->description) }}' ><br>
         <label for='purchase_link'>*Purchase Link</label>
         <input type='text' name='purchase_link' id='purchase_link' value='{{ old('purchase_link', $movie->purchase_link) }}' ><br>
+        <label for='actor_id'>Actor:</label>
+        <select id='actor_id' name='actor_id'>
+            @foreach($actorsForDropdown as $actor_id => $actorName)
+                 <option value='{{ $actor_id }}' {{ ($movie->actor_id == $actor_id) ? 'SELECTED' : '' }}>
+                     {{$actorName}}
+                 </option>
+             @endforeach
+        </select><br>
         <input type='submit' value='Save Changes'>
     </form>
 	@if(count($errors) > 0)

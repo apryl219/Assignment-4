@@ -20,14 +20,15 @@
         <input type='text' name='description' id='description' value='{{ old('description', $movie->description) }}' ><br>
         <label for='purchase_link'>*Purchase Link</label>
         <input type='text' name='purchase_link' id='purchase_link' value='{{ old('purchase_link', $movie->purchase_link) }}' ><br>
-        <label for='actor_id'>Actor:</label>
-        <select id='actor_id' name='actor_id'>
-            @foreach($actorsForDropdown as $actor_id => $actorName)
-                 <option value='{{ $actor_id }}' {{ ($movie->actor_id == $actor_id) ? 'SELECTED' : '' }}>
-                     {{$actorName}}
+        <label for='actor_id'>* Actor:</label>
+       <select id='actor_id' name='actor_id'>
+             <option value='0'>Choose</option>
+             @foreach($actorsForDropdown as $actor_id => $actorName)
+                 <option value='{{ $actor_id }}'>
+                     {{ $actorName }}
                  </option>
              @endforeach
-        </select><br>
+         </select><br>
         <input type='submit' value='Save Changes'>
     </form>
 	@if(count($errors) > 0)

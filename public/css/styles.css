@@ -1,0 +1,49 @@
+body {
+	font-family: 'Helvetica';
+	text-align: center;
+}
+
+nav {
+	text-align: center;
+}
+
+nav li {
+	display: inline;
+	padding-right: 10px;
+}
+li {
+	list-style-type: none;
+}
+h1  {
+	text-align: center;
+	color: gray;
+}
+
+h2 {
+	text-align: center;
+}
+
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+button {
+	display: inline;
+	margin-left: auto;
+	margin-right: auto;
+	color: red;
+	text-decoration: none;
+
+}
+
+.error {
+	color: red;
+}
+
+.message {
+	color: red;
+	background-color: yellow;
+}

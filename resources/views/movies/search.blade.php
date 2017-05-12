@@ -6,35 +6,37 @@
 @endsection
 
 @section('content')
-    <h1>Search</h1>
+    <h1>Find a Movie</h1>
 
     <form method='GET' action='/search'>
 
-        <label for='searchTerm'>Search by title:</label>
-        <input type='text' name='searchTerm' id='searchTerm' value=''><br>
+        <label for='searchTerm'>Title</label>
+        <input type='text' name='searchTerm' id='searchTerm' value='{{ $searchTerm or '' }}'>
+        <br>
 
-        <input type='checkbox' name='caseSensitive'  >
+        <input type='checkbox' name='caseSensitive' {{ ($caseSensitive) ? 'CHECKED' : '' }} >
         <label>case sensitive</label>
 
         <br>
-        <input type='submit' class='btn btn-primary btn-small'>
+        <input type='submit' value='Search' class='searchbtn'>
 
     </form>
+
     @if($searchTerm != null)
         <h2>Results for query: <em>{{ $searchTerm }}</em></h2>
 
         @if(count($searchResults) == 0)
             No matches found.
         @else
-            <div class='book'>
-                @foreach($searchResults as $title => $book)
-
-                    <h3>{{ $title }}</h3>
-                    <h4>by {{ $book['author'] }}</h4>
-                    <img src='{{$book['cover']}}'>
-
+            
+                @foreach($searchResults as $title => $movie)
+                    <div class='movie'>
+                        <h3>{{ $title }}</h3>
+                        <img src='{{ $movie['cover']}}'>
+                        <p>Description {{ $movie['description'] }}</p>    
+                    </div>
                 @endforeach
-            </div>
+            
         @endif
     @endif
 @endsection

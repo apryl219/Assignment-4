@@ -14,7 +14,14 @@
 			<div class="message">{{ Session::get('message') }}</div>
 		@endif
 		<header>
-			<--Add Header Image here in master.blade.php-->
+			<h1>Your Movie Watch List</h1>
+			<nav>
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/search">Search</a></li>
+					<li><a href="/movies/new">Add New Movie</a></li>
+				</ul>
+			</nav>
 		</header>
 		
 		<section>

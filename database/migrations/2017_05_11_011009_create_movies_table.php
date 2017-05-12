@@ -20,8 +20,7 @@ class CreateMoviesTable extends Migration
 
                 
                 $table->timestamps();
-
-               
+                
                 $table->string('title');
                 $table->string('cover')->nullable();
                 $table->text('description')->nullable();

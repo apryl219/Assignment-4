@@ -17,8 +17,6 @@
         <input type='text' name='cover' id='cover' value='{{ old('cover') }}' ><br>
         <label for='title'>Actor</label>
         <input type='text' name='actor' id='actor' value='{{ old('actor') }}' ><br>
-        <label for='title'>Genre</label>
-        <input type='text' name='genre' id='genre' value='{{ old('genre') }}' ><br>
         <label for='title'>Description</label>
         <input type='text' name='description' id='description' value='{{ old('description') }}' ><br>
         <label for='title'>*Purchase Link</label>

@@ -32,7 +32,6 @@ class MoviesTableSeeder extends Seeder
                     'title' => $title,
                     'cover' => $movie['cover'],
                     'actor_id' => $actor_id, 
-                    'genre' => $movie['genre'],
                     'description' => $movie['description'],
                     'purchase_link' => $movie['purchase_link'],
                 ]);

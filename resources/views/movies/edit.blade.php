@@ -16,8 +16,6 @@
         <input type='text' name='title' id='title' value='{{ old('title', $movie->title) }}' ><br>
         <label for='cover'>Cover Image URL</label>
         <input type='text' name='cover' id='cover' value='{{ old('cover', $movie->cover) }}' ><br>
-        <label for='genre'>Genre</label>
-        <input type='text' name='genre' id='genre' value='{{ old('genre', $movie->genre) }}' ><br>
         <label for='description'>Description</label>
         <input type='text' name='description' id='description' value='{{ old('description', $movie->description) }}' ><br>
         <label for='purchase_link'>*Purchase Link</label>

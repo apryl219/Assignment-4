@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Movie;
 use App\Actor;
+use App\Genre;
 use Session;
 
 class MovieController extends Controller
@@ -75,7 +76,7 @@ class MovieController extends Controller
 
     /**
     * GET
-    * /movies/search  <----THIS FUNCTION IS USING THE MOVIES.JSON FOR THE DATABASE NOT FOR A4 DELETE
+    * /movies/search 
     */
     public function search(Request $request){
 
